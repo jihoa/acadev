@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- annotation 기반의 Spring MVC Controller 프로그램 모델 구성 -->
+    <mvc:annotation-driven />
+
+    <!-- Spring Bean으로 자동 등록될 애너테이션이 있는 콤포넌트의 클래스 경로 스캔 -->
+    <!-- 기본적으로 Spring에서 제공하는 @Component, @Repository, @Service, @Controller,
+        @RestController, @ControllerAdvice 및 @Configuration 스테레오 타입이 감지된다.
+        use-default-filters="false"로 선언하면 위의 디폴트 애너테이션을 스캔하지 않는다.
+    -->
+    <context:component-scan base-package="com.asianaidt.springmvc.step01" />
+    <!-- 사용자가 원하는 대로 스캔되는 빈들을 넣고 뺄수 있음 -->
+    <!--
+        <context:component-scan base-package="com.asianaidt.springmvc.step01" use-default-filters="false">
+            <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+        </context:component-scan>
+
+        <context:component-scan base-package="com.asianaidt.springmvc.step01" use-default-filters="false">
+            <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+            <context:exclude-filter  type="annotation" expression="org.springframework.stereotype.Service" />
+            <context:exclude-filter  type="annotation" expression="org.springframework.stereotype.Repository" />
+        </context:component-scan>
+-->
+    <!-- 정적 자원 위치 mapping. 해당 위치의 디렉터리에서 바로 접근 가능 -->
+    <!--웹 브라우저에서 효율적인로드를 위해 최적화 된 캐시 헤더를 사용하여 이미지, js 및 css 파일과 같은
+    정적 리소스를 제공하기위한 핸들러를 구성합니다.
+    Spring의 리소스 처리를 통해 도달 할 수있는 모든 경로에서 리소스를 제공 할 수 있습니다. -->
+    <mvc:resources mapping="/css/**" location="/resources/css/" />
+    <mvc:resources mapping="/img/**" location="/resources/img/" />
+    <mvc:resources mapping="/js/**" location="/resources/js/" />
+
+
+    <!-- ViewResolver 설정 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>

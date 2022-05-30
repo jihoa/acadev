@@ -1,0 +1,8 @@
+rootProject.name = 'academy-parent'
+
+include 'java-servlet'
+include 'spring-mvc-step01'
+include 'spring-mvc-step02'
+include 'spring-mvc-step03'
+include 'spring-restful-step01'
+

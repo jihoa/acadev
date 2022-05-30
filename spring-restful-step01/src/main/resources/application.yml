@@ -1,0 +1,72 @@
+## profile 전체 공통 설정
+server:
+  port: 8443
+  http2:
+    enabled: true
+  ssl:
+    enabled: true
+    key-store: classpath:META-INF/arori-keystore.p12
+    key-store-password: 510544
+    key-store-type: PKCS12
+    trust-store-type: PKCS12
+    key-alias: arori-keystore
+  tomcat:
+    uri-encoding: UTF-8
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto:
+    open-in-view: false
+  h2:
+    console:
+      enabled: true
+
+
+logging:
+  level:
+    root: info
+
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    username: SA
+    password:
+    platform:  H2
+    driver-class-name: org.h2.Driver
+    initialization-mode: always   # DataSource 초기화시 DDL및 DML 적용할 지 결정
+  jpa:
+    generate-ddl: true        # 스프링부트 시작 시 스키마 사용
+    open-in-view: false       # jpa 세션 유지 구간
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true        # 보기 좋게
+        use_sql_comments: true  # 디버깅 용이
+        type:
+          descriptor:
+            sql: trace          # 바인딩 파라미터 보기
+
+logging:
+  level:
+    root: info
+    org.springframework.web: info
+    com.asianaidt.springrestful.step01: debug
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod

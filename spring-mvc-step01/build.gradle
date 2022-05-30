@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+}
+group 'com.asianaidt'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+compileJava.options.encoding= 'UTF-8'
+
+ext {
+    junitVersion='5.7.0'
+    servletVersion='4.0.1'
+    mockitoVersion='3.9.0'
+    lombokVersion='1.18.20'
+    assertjVersion='3.19.0'
+    springVersion='5.3.5'
+    jstlVersion='1.2'
+    tomcatVersion='9.0.45'
+    jacksonVersion='2.11.0'
+    jsonPathVersion='2.5.0'
+    hamcrestVersion='2.2'
+}
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation "org.springframework:spring-webmvc:${springVersion}"
+    implementation "javax.servlet:javax.servlet-api:${servletVersion}"
+
+    // jsp
+    implementation "javax.servlet:jstl:${jstlVersion}"
+    implementation "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+
+    // json lib
+    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+
+    // test
+    implementation "com.jayway.jsonpath:json-path:${jsonPathVersion}"
+
+    implementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+    testImplementation "org.springframework:spring-test:${springVersion}"
+
+    // mock Test
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
+
+    testImplementation "org.hamcrest:hamcrest-core:${hamcrestVersion}"
+    testImplementation "org.hamcrest:hamcrest-library:${hamcrestVersion}"
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+}
+
+test {
+    useJUnitPlatform()
+}

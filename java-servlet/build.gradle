@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+}
+group 'com.asianaidt'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+compileJava.options.encoding= 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion='5.7.0'
+    servletVersion='4.0.1'
+    mockitoVersion='3.9.0'
+    lombokVersion='1.18.20'
+    assertjVersion='3.19.0'
+}
+
+
+dependencies {
+    // junit
+    implementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+    implementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+
+    // servlet
+    implementation "javax.servlet:javax.servlet-api:${servletVersion}"
+
+    // mock test
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
+
+    //lombok 설정
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}
+
+test {
+    useJUnitPlatform()
+}
+
